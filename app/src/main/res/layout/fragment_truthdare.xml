@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:padding="16dp" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:id="@+id/turnDisplay" android:text="Your Turn" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <Button android:id="@+id/truthBtn" android:text="Truth" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+        <Button android:id="@+id/dareBtn" android:text="Dare" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <Spinner android:id="@+id/categorySelect" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/questionText" android:text="Choose a mode and category" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/generateBtn" android:text="Generate" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/doneBtn" android:text="Done" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

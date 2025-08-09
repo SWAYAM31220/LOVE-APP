@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown</title>
+  <link rel="stylesheet" href="countdown.css" />
+</head>
+<body>
+  <div class="countdown-container">
+    <h2>Anniversary Countdown</h2>
+    <div class="count" id="anniversary"></div>
+
+    <h2 id="birthday-title"></h2>
+    <div class="count" id="birthday"></div>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const username = localStorage.getItem("currentUser");
+
+    // Fetch dynamic dates from Supabase if needed
+    async function getUserDates() {
+      const { data, error } = await supabase
+        .from('user_dates')
+        .select('*')
+        .eq('username', username)
+        .single();
+
+      if (error) {
+        console.error(error);
+        return null;
+      }
+      return data;
+    }
+
+    const anniversaryDate = new Date("2026-07-07"); // fallback default
+
+    const birthdays = {
+      him: {
+        label: "Her Birthday Countdown",
+        date: new Date("2025-08-04")
+      },
+      her: {
+        label: "His Birthday Countdown",
+        date: new Date("2026-03-18")
+      }
+    };
+
+    function updateCountdown(id, targetDate) {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff < 0) {
+        document.getElementById(id).textContent = "🎉 It's today! 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById(id).textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    async function init() {
+      const userBirthday = birthdays[username];
+
+      if (userBirthday) {
+        document.getElementById("birthday-title").textContent = userBirthday.label;
+        setInterval(() => updateCountdown("birthday", userBirthday.date), 1000);
+      }
+
+      setInterval(() => updateCountdown("anniversary", anniversaryDate), 1000);
+    }
+
+    init();
+  </script>
+</body>
+</html>

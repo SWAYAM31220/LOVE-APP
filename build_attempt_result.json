@@ -1,0 +1,6 @@
+{
+  "ran": false,
+  "returncode": null,
+  "stdout": "",
+  "stderr": "[Errno 2] No such file or directory: './gradlew'"
+}

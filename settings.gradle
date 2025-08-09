@@ -1,0 +1,2 @@
+rootProject.name = "WebAppConverted"
+include ':app'

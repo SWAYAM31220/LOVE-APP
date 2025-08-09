@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Truth or Dare</title>
+  <link rel="stylesheet" href="truthdare.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Truth or Dare 💕</h1>
+
+    <div class="turn-info">
+      <p id="turnDisplay">Your Turn 💖</p>
+    </div>
+
+    <div class="mode-category">
+      <div class="modes">
+        <button onclick="selectMode('truth')">Truth</button>
+        <button onclick="selectMode('dare')">Dare</button>
+      </div>
+      <div class="categories">
+        <select id="categorySelect">
+          <option value="romantic">Romantic</option>
+          <option value="funny">Funny</option>
+          <option value="personal">Personal</option>
+          <option value="spicy">Spicy</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="question-box">
+      <p id="questionText">Choose a mode and category to begin!</p>
+      <button id="generateBtn" onclick="generate()">Generate 🎲</button>
+    </div>
+
+    <div class="done-wrap">
+      <button id="doneBtn" onclick="switchTurn()">✅ Done</button>
+    </div>
+
+    <a href="home.html" class="back">← Back to Home</a>
+  </div>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const questions = {
+      truth: {
+        romantic: [
+          "What do you love most about me?",
+          "Have you ever imagined our wedding?",
+          "What's your favorite memory with me?",
+          "Do you believe in soulmates?"
+        ],
+        funny: [
+          "Have you ever farted in front of me secretly?",
+          "What’s the weirdest thing you’ve done alone?",
+          "What’s the silliest nickname you had?",
+          "Have you ever laughed so hard you cried?"
+        ],
+        personal: [
+          "What’s a secret you’ve never told anyone?",
+          "What’s your biggest insecurity?",
+          "Who do you trust the most in life?",
+          "Have you ever felt jealous of someone?"
+        ],
+        spicy: [
+          "What’s your wildest fantasy?",
+          "Have you ever had a naughty dream about me?",
+          "What turns you on instantly?",
+          "Describe our most passionate moment."
+        ]
+      },
+      dare: {
+        romantic: [
+          "Write a poem for me right now!",
+          "Record a voice saying 'I love you' 5 times.",
+          "Hold my hand tightly for 60 seconds.",
+          "Stare into my eyes without blinking for 30 seconds."
+        ],
+        funny: [
+          "Do 5 jumping jacks while saying 'I’m a monkey!'",
+          "Make a funny face and click a selfie.",
+          "Dance silently for 30 seconds.",
+          "Talk like a cartoon character for 1 min."
+        ],
+        personal: [
+          "Share the last photo you took.",
+          "Reveal your screen time.",
+          "Show your gallery’s 5th photo.",
+          "Share one thing you fear in relationships."
+        ],
+        spicy: [
+          "Whisper something naughty in my ear.",
+          "Send a flirty emoji combo now!",
+          "Give a virtual kiss 😘",
+          "Act like you're blushing for 15 seconds."
+        ]
+      }
+    };
+
+    let mode = "";
+    let currentTurn = localStorage.getItem("turn") || "you";
+
+    function updateTurnDisplay() {
+      document.getElementById("turnDisplay").innerText =
+        currentTurn === "you" ? "Your Turn 💖" : "Partner's Turn 💞";
+    }
+
+    function selectMode(selectedMode) {
+      mode = selectedMode;
+      document.getElementById("questionText").innerText = `Mode: ${mode.toUpperCase()} selected. Now choose category.`;
+    }
+
+    function generate() {
+      if (!mode) return alert("Please select a mode first!");
+      const category = document.getElementById("categorySelect").value;
+      const options = questions[mode][category];
+      const random = options[Math.floor(Math.random() * options.length)];
+      document.getElementById("questionText").innerText = random;
+    }
+
+    function switchTurn() {
+      currentTurn = currentTurn === "you" ? "partner" : "you";
+      localStorage.setItem("turn", currentTurn);
+      mode = "";
+      document.getElementById("questionText").innerText = "Choose a mode and category to begin!";
+      updateTurnDisplay();
+    }
+
+    updateTurnDisplay();
+  </script>
+</body>
+</html>

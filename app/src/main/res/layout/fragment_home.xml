@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:id="@+id/usernameDisplay" android:text="Welcome" android:textSize="18sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/dailyQuestionsBtn" android:text="Daily Questions" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/truthDareBtn" android:text="Truth or Dare" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/countdownBtn" android:text="Countdowns" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/secretBtn" android:text="Secret" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/chatBtn" android:text="Chat" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/logoutBtn" android:text="Logout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

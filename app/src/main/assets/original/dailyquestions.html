@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Questions</title>
+  <link rel="stylesheet" href="dailyquestions.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Hey, Love 💖</h2>
+    <form id="dailyForm">
+      <div class="question">
+        <label for="q1">1. How do you feel today?</label>
+        <textarea id="q1" placeholder="Share your thoughts..."></textarea>
+      </div>
+      <div class="question">
+        <label for="q2">2. Did something upset you?</label>
+        <textarea id="q2" placeholder="Anything bothering you?"></textarea>
+      </div>
+      <div class="question">
+        <label for="q3">3. What were you expecting today?</label>
+        <textarea id="q3" placeholder="Share your expectations..."></textarea>
+      </div>
+      <button type="submit">Save Answers 💌</button>
+    </form>
+    <div id="statusMsg"></div>
+  </div>
+
+  <script type="module">
+    import { supabase } from "./supabaseClient.js";
+
+    const form = document.getElementById('dailyForm');
+    const currentUser = localStorage.getItem("currentUser");
+
+    // Debug check for Supabase and user
+    console.log("✅ Supabase Client Loaded:", supabase);
+    console.log("✅ Current User:", currentUser);
+
+    if (!supabase || !supabase.from) {
+      document.getElementById("statusMsg").textContent = "Supabase failed to load!";
+      throw new Error("Supabase client not initialized. Check supabaseClient.js");
+    }
+
+    if (!currentUser) {
+      alert("User not logged in. Redirecting...");
+      window.location.href = "index.html";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const q1 = document.getElementById("q1").value.trim();
+      const q2 = document.getElementById("q2").value.trim();
+      const q3 = document.getElementById("q3").value.trim();
+
+      if (!q1 || !q2 || !q3) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      console.log("✅ Submitting answers:", { username: currentUser, q1, q2, q3 });
+
+      try {
+        const { data, error } = await supabase
+          .from("daily_questions")
+          .insert([
+            {
+              username: currentUser,
+              q1,
+              q2,
+              q3,
+              created_at: new Date().toISOString()
+            }
+          ]);
+
+        console.log("✅ Insert Result:", { data, error });
+
+        if (error) throw error;
+
+        document.getElementById("statusMsg").textContent = "Saved successfully 💞";
+        form.reset();
+      } catch (err) {
+        console.error("❌ Supabase Insert Error:", err);
+        document.getElementById("statusMsg").textContent = "Something went wrong 😢";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:padding="16dp" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:text="Daily Questions" android:textSize="20sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <EditText android:id="@+id/q1" android:hint="How do you feel today?" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <EditText android:id="@+id/q2" android:hint="Did something upset you?" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <EditText android:id="@+id/q3" android:hint="What were you expecting today?" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/saveBtn" android:text="Save Answers" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/statusMsg" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Love Space 💖</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="favicon.png" />
+    <script
+      src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+      defer
+    ></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function (OneSignal) {
+        await OneSignal.init({
+          appId: "02d91be9-005b-4470-9c62-f552a1ea2064",
+          serviceWorkerPath: "OneSignalSDKWorker.js", // 👈 Important
+          allowLocalhostAsSecureOrigin: true, // 👈 Must for localhost
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
+    
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #fce4ec, #e1bee7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .login-container {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        padding: 30px 40px;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      .login-container h1 {
+        font-size: 28px;
+        color: #880e4f;
+        margin-bottom: 10px;
+      }
+      .login-container p {
+        color: #6a1b9a;
+        margin-bottom: 25px;
+      }
+      .login-container input {
+        padding: 12px;
+        margin: 10px 0;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        background: rgba(255, 255, 255, 0.6);
+      }
+      .login-container button {
+        padding: 12px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        background-color: #ad1457;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background 0.3s;
+      }
+      .login-container button:hover {
+        background-color: #880e4f;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Welcome, Lovebirds 💕</h1>
+      <p>Enter your secret space</p>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Enter</button>
+      </form>
+    </div>
+
+    <script type="module">
+      import { supabase } from "./supabaseClient.js";
+
+      const users = {
+        him: { password: "loveher", name: "Him 💙" },
+        her: { password: "lovehim", name: "Her 💖" },
+      };
+
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const username = document
+            .getElementById("username")
+            .value.trim()
+            .toLowerCase();
+          const password = document.getElementById("password").value.trim();
+
+          if (users[username] && users[username].password === password) {
+            localStorage.setItem("currentUser", username);
+
+            // Optional: Supabase                                                                                                                   logic
+            // await supabase.auth.signInWithPassword({ email, password });
+
+            window.location.href = "home.html";
+          } else {
+            alert("Incorrect credentials");
+          }
+        });
+    </script>
+  </body>
+</html>

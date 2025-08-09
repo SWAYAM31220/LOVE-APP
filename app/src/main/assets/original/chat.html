@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat 💬</title>
+  <link rel="stylesheet" href="chat.css" />
+
+  <!-- ✅ Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBk5g2fsFKX6T6G6teKtpJZVcrjMPdfts4",
+      authDomain: "neem-ka-patta-1d946.firebaseapp.com",
+      databaseURL: "https://neem-ka-patta-1d946-default-rtdb.firebaseio.com",
+      projectId: "neem-ka-patta-1d946",
+      storageBucket: "neem-ka-patta-1d946.firebasestorage.app",
+      messagingSenderId: "67843388062",
+      appId: "1:67843388062:web:66beb09e626144f647018f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    window.db = getDatabase(app); // Make it global for chat.js
+  </script>
+
+  <script type="module" src="chat.js"></script>
+</head>
+<body>
+  <div class="chat-wrapper">
+    <div class="chat-header">
+      <div class="chat-user-info">
+        <div class="chat-avatar">💖</div>
+        <div>
+          <div class="chat-username">Your Love</div>
+          <div class="chat-status" id="lastSeen">online</div>
+        </div>
+      </div>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+    <div class="chat-box" id="chatBox"></div>
+
+    <form id="chatForm" class="chat-form">
+      <input type="text" id="chatInput" placeholder="Type a message..." required />
+      <button type="submit" class="send-btn">➤</button>
+    </form>
+  </div>
+</body>
+</html>

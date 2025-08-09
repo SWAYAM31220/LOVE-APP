@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Home</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <header>
+    <h1>Welcome, <span id="username-display"></span> 💖</h1>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <section class="menu">
+      <h2>Main Menu</h2>
+      <ul>
+        <li><a href="dailyquestions.html">💌 Daily Questions</a></li>
+        <li><a href="truthdare.html">🎲 Truth or Dare</a></li>
+        <li><a href="countdown.html">⏳ Countdowns</a></li>
+        <li><a href="secret.html">🔥 Secret (Upload & Gallery)</a></li>
+        <li><a href="chat.html">💬 Chat</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) window.location.href = "index.html";
+
+    document.getElementById("username-display").textContent =
+      currentUser === "him" ? "Him 💙" : "Her 💖";
+
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      localStorage.removeItem("currentUser");
+
+      // Optional: Supabase sign-out if you use Auth
+      await supabase.auth.signOut();
+
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

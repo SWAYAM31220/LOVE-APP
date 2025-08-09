@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph" app:startDestination="@id/loginFragment">
+
+    <fragment android:id="@+id/loginFragment" android:name="com.example.webappconverted.ui.fragments.LoginFragment" android:label="Login"/>
+    <fragment android:id="@+id/homeFragment" android:name="com.example.webappconverted.ui.fragments.HomeFragment" android:label="Home"/>
+    <fragment android:id="@+id/dailyQuestionsFragment" android:name="com.example.webappconverted.ui.fragments.DailyQuestionsFragment" android:label="DailyQuestions"/>
+    <fragment android:id="@+id/truthDareFragment" android:name="com.example.webappconverted.ui.fragments.TruthDareFragment" android:label="TruthDare"/>
+    <fragment android:id="@+id/countdownFragment" android:name="com.example.webappconverted.ui.fragments.CountdownFragment" android:label="Countdown"/>
+    <fragment android:id="@+id/secretFragment" android:name="com.example.webappconverted.ui.fragments.SecretFragment" android:label="Secret"/>
+    <fragment android:id="@+id/chatFragment" android:name="com.example.webappconverted.ui.fragments.ChatFragment" android:label="Chat"/>
+</navigation>
